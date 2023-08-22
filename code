@@ -1,0 +1,16 @@
+function fetch_names() { //this code fetchs name, ID, url of any doc or image saved in any drive forlder 
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = ss.getSheetByName('Drive Link');
+    var folder = DriveApp.getFolderById('13kBFoV-KWCnQYuT02fBJ_cvRhP1FtVi1');
+    var files = folder.getFiles();
+    var list = [['Name', 'Url']];
+  
+    while (files.hasNext()) {
+      var file = files.next();
+      var row = [file.getName(), file.getUrl()];
+      list.push(row);
+    }
+    
+    sheet.getRange(1, 1, list.length, list[0].length).setValues(list);
+  }
+  
